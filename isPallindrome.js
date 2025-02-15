@@ -23,13 +23,33 @@ class Solution {
      * @param {string} s
      * @return {boolean}
      */
+  
+    // Time Complexity: O(n)
+    // Space Complexity: O(n)
     isPalindrome(s) {
         const alphaNumerixRegex = /^[a-zA-Z0-9]+$/
-        const str = [...s].filter(char => alphaNumerixRegex.test(char)).join('').toLowerCase()   
-        let revStr = ''
-        for(let char of str) {
-            revStr = char + revStr
-        }
-        return revStr === str
+        const str = s.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+        return str === str.split('').reverse().join('');
     }
+
+    // Time Complexity: O(n) Space Complexity: 1
+    isPalindromeV2(s) {
+      const alphaNumerixRegex = /[a-zA-Z0-9]/; 
+      let i = 0, j = s.length - 1;
+      const refactoredStr = s.toLowerCase();
+      
+      while (i < j) {
+          // keep skipping non alphanumeric character until it encounters a valid character to compare with
+          while (i < j && !alphaNumerixRegex.test(refactoredStr[i])) i++; 
+          while (i < j && !alphaNumerixRegex.test(refactoredStr[j])) j--;
+          
+          if (refactoredStr[i] !== refactoredStr[j]) return false;
+  
+          i++;
+          j--;
+     }
+    
+     return true;
+  }
+    
 }
