@@ -3,7 +3,8 @@ function maxSubarraySum(nums) {
     let currentSum = nums[0]; // Start tracking the sum
 
     for (let i = 1; i < nums.length; i++) {
-        // Decide whether to extend the current subarray or start a new one
+        // If currentSum + nums[i] is greater, it means the subarray benefits from adding nums[i].
+        // If nums[i] is greater, it means the previous sum was a burden, so we restart the subarray from nums[i].
         currentSum = Math.max(nums[i], currentSum + nums[i]);
         maxSum = Math.max(maxSum, currentSum); // Update max sum if needed
     }
